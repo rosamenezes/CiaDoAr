@@ -1,7 +1,7 @@
-import { Link } from 'expo-router';
 import React from 'react';
+import { Link } from 'expo-router';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import RNButton from '../components/Button';
+// import RNButton from '../components/Button';
 
 export default function HomeScreen() {
   return (
@@ -12,12 +12,15 @@ export default function HomeScreen() {
         resizeMode="contain"
       />
       <Link href="/criar" asChild>
-        <RNButton name="Novo laudo" />
+        <TouchableOpacity className="bg-pink-600 py-3 px-10 rounded-full w-full max-w-xs mx-auto mb-4" >
+          <Text className="text-white text-center font-bold">Criar</Text>
+          </TouchableOpacity>
       </Link>
-      <Link href="/criar" asChild>
-        <RNButton name="Salvos" />
+      <Link href="/salvos" asChild>
+        <TouchableOpacity className="bg-pink-600 py-3 px-10 rounded-full w-full max-w-xs mx-auto mb-4" >
+          <Text className="text-white text-center font-bold">Salvos</Text>
+        </TouchableOpacity>
       </Link>
-
     </View>
   );
 }
