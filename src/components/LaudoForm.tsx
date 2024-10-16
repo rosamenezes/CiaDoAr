@@ -49,6 +49,8 @@ return (
         onImageSelect={(uri: string) => setValue('image', uri)}
     />
 
+    <DatePickerInput name="data" control={control} label="Data" />
+
     <TouchableOpacity
         className="bg-pink-600 py-3 px-10 rounded-full w-full max-w-xs mx-auto my-8"
         onPress={handleSubmit(handleCreate)}
@@ -60,10 +62,9 @@ return (
         <Text className="text-white text-center">Criar</Text>
         )}
     </TouchableOpacity>
-    <DatePickerInput name="data" control={control} label="Data" />
 
     </ScrollView>
-);
+  );
 };
 
 export default LaudoForm;
