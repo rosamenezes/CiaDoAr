@@ -1,4 +1,6 @@
 export interface FormData {
+    image: string;
+    condicaoVela: string;
     data: string;
     proprietario: string;
     Telefone: string;
@@ -7,28 +9,28 @@ export interface FormData {
     Fabrica: string;
     Modelo: string;
     Serial: string;
-    "Data de fabricação": string;
-    "Cor Bordo": string;
-    "Cor Extra": string;
-    "Cor Intra": string;
-    "Check Tirantes": string;
-    "Batoques e Argolas": string;
+    DataDeFabricação: string;
+    CorBordo: string;
+    CorExtra: string;
+    CorIntra: string;
+    CheckTirantes: string;
+    BatoquesArgolas: string;
     Argolas: string;
     Distorcedor: string;
     Roldanas: string;
-    "Carga nas Linhas": string;
-    "Troca de linhas": string;
-    "Simetria e Trimagem": string;
+    CargasNasLinhas: string;
+    TrocaDeLinhas: string;
+    SimetriaETrimagem: string;
     Corte: string;
-    "Check Perfil e Costuras": string;
-    "Check Intradorso": string;
-    "Check Bordo Ataque": string;
-    "Check Extradorso": string;
-    "Teste Resistencia tecido": string;
-    "Porosidade bordo ataque": string;
-    "Porosidade Extradorso": string;
-    "Porosidade Intradorso": string;
-    "Parecer do Tecido (fabricante)": string;
+    CheckPerfilCosturas: string;
+    CheckIntradorso: string;
+    CheckBordoAtaque: string;
+    CheckExtradorso: string;
+    TesteResistenciaTecido: string;
+    PorosidadeBordoAtaque: string;
+    PorosidadeExtradorso: string;
+    PorosidadeIntradorso: string;
+    ParecerDoTecidoFabricante: string;
     Observação: string;
 }
 
@@ -64,4 +66,13 @@ export const formFields = [
     { name: "Porosidade Intradorso", label: "Porosidade Intradorso", placeholder: "Porosidade Intradorso" },
     { name: "Parecer do Tecido (fabricante)", label: "Parecer do Tecido (fabricante)", placeholder: "Parecer do Tecido (fabricante)" },
     { name: "Observação", label: "Observação", placeholder: "Observação" },
+];
+
+export const optionsCondicao = [
+  { label: 'Ótimo estado - Revisar a cada 100h ou 1 ano', value: 'Ótimo estado - Revisar a cada 100h ou 1 ano' },
+  { label: 'Muito bom - Revisar a cada 100h ou 1 ano', value: 'Muito bom - Revisar a cada 100h ou 1 ano' },
+  { label: 'Usado, bom estado - Revisar a cada 100h ou 1 ano', value: 'Usado, bom estado - Revisar a cada 100h ou 1 ano' },
+  { label: 'Usado, razoável estado - Revisar a cada 50h ou 6 meses', value: 'Usado, razoável estado - Revisar a cada 50h ou 6 meses' },
+  { label: 'Muito usado - Revisar a cada 50h ou 6 meses', value: 'Muito usado - Revisar a cada 50h ou 6 meses' },
+  { label: 'Não aconselhado voar - Equipamento condenado', value: 'Não aconselhado voar - Equipamento condenado' },
 ];

@@ -7,9 +7,10 @@ interface ImageInputFieldProps {
     name: string;
     control: Control<any>;
     label: string;
+    onImageSelect?: (uri: string) => void;  // Adicionando a propriedade onImageSelect
 }
 
-const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label }) => {
+const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label, onImageSelect }) => {
     const handleImagePicker = async (onChange: (uri: string) => void) => {
         const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
         if (permissionResult.granted === false) {
@@ -17,7 +18,6 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label 
             return;
         }
 
-        // Opções para o usuário escolher entre a galeria e a câmera
         const options = await Alert.alert(
             "Selecionar Imagem",
             "Escolha uma opção:",
@@ -32,6 +32,9 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label 
                         });
                         if (!cameraResult.canceled) {
                             onChange(cameraResult.assets[0].uri);
+                            if (onImageSelect) {
+                                onImageSelect(cameraResult.assets[0].uri);
+                            }
                         }
                     },
                 },
@@ -46,6 +49,9 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label 
                         });
                         if (!libraryResult.canceled) {
                             onChange(libraryResult.assets[0].uri);
+                            if (onImageSelect) {
+                                onImageSelect(libraryResult.assets[0].uri);
+                            }
                         }
                     },
                 },
@@ -56,7 +62,6 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label 
             ]
         );
 
-        // Se o usuário não escolher nenhuma opção
         if (options === undefined) {
             console.log("Nenhuma opção escolhida.");
         }
@@ -80,4 +85,5 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label 
 };
 
 export default ImageInputField;
+
 
