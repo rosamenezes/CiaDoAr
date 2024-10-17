@@ -1,7 +1,7 @@
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { Alert } from 'react-native';
-import { FormData } from '../../assets/mocks/mocks';
+import { FormData } from '../assets/mocks/mocks';
 import { format } from 'date-fns';
 
 export const generatePDF = async (data: FormData) => {

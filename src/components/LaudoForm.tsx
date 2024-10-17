@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import StandardInput from "../components/StandardInput";
 import ImageInput from "../components/ImageInput";
 import DatePickerInput from "../components/DatePickerInput";
+import CheckInput from "../components/CheckInput";
 import { formFields } from "../assets/mocks/mocks";
 import CustomSelect from "../components/SelectInput";
 import { FormData, optionsCondicao } from "../assets/mocks/mocks";
@@ -49,6 +50,13 @@ return (
         onImageSelect={(uri: string) => setValue('image', uri)}
     />
 
+    <CheckInput
+        name="choice"
+        control={control}
+        label="Selecione uma opção"
+        observationName="observation"
+    />
+
     <DatePickerInput name="data" control={control} label="Data" />
 
     <TouchableOpacity
@@ -64,7 +72,7 @@ return (
     </TouchableOpacity>
 
     </ScrollView>
-  );
+);
 };
 
 export default LaudoForm;
