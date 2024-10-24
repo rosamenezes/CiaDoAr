@@ -1,71 +1,71 @@
 export interface FormData {
     image: string;
     condicaoVela: string;
-    data: string;
+    data: Date;
     proprietario: string;
-    Telefone: string;
-    Cidade: string;
-    Estado: string;
-    Fabrica: string;
-    Modelo: string;
-    Serial: string;
-    DataDeFabricação: string;
-    CorBordo: string;
-    CorExtra: string;
-    CorIntra: string;
-    CheckTirantes: string;
-    BatoquesArgolas: string;
-    Argolas: string;
-    Distorcedor: string;
-    Roldanas: string;
-    CargasNasLinhas: string;
-    TrocaDeLinhas: string;
-    SimetriaETrimagem: string;
-    Corte: string;
-    CheckPerfilCosturas: string;
-    CheckIntradorso: string;
-    CheckBordoAtaque: string;
-    CheckExtradorso: string;
-    TesteResistenciaTecido: string;
-    PorosidadeBordoAtaque: string;
-    PorosidadeExtradorso: string;
-    PorosidadeIntradorso: string;
-    ParecerDoTecidoFabricante: string;
-    Observação: string;
+    telefone: string;
+    cidade: string;
+    estado: string;
+    fabrica: string;
+    modelo: string;
+    serial: string;
+    dataDeFabricacao: string;
+    corBordo: string;
+    corExtra: string;
+    corIntra: string;
+    checkTirantes: string;
+    batoquesArgolas: string;
+    argolas: string;
+    distorcedor: string;
+    roldanas: string;
+    cargasNasLinhas: string;
+    trocaDeLinhas: string;
+    simetriaTrimagem: string;
+    corte: string;
+    checkPerfilCosturas: string;
+    checkIntradorso: string;
+    checkBordoAtaque: string;
+    checkExtradorso: string;
+    testeResistenciaTecido: string;
+    porosidadeBordoAtaque: string;
+    porosidadeExtradorso: string;
+    porosidadeIntradorso: string;
+    parecerDoTecidoFabricante: string;
+    observacoes: string;
 }
 
 export const formFields = [
-    { name: "data", label: "Data", placeholder: "Data" },
-    { name: "proprietario", label: "Proprietário", placeholder: "Proprietário" },
-    { name: "Telefone", label: "Telefone", placeholder: "Telefone" },
-    { name: "Cidade", label: "Cidade", placeholder: "Cidade" },
-    { name: "Estado", label: "Estado", placeholder: "Estado" },
-    { name: "Fabrica", label: "Fabrica", placeholder: "Fabrica" },
-    { name: "Modelo", label: "Modelo", placeholder: "Modelo" },
-    { name: "Serial", label: "Serial", placeholder: "Serial" },
-    { name: "Data de fabricação", label: "Data de fabricação", placeholder: "Data de fabricação" },
-    { name: "Cor Bordo", label: "Cor Bordo", placeholder: "Cor Bordo" },
-    { name: "Cor Extra", label: "Cor Extra", placeholder: "Cor Extra" },
-    { name: "Cor Intra", label: "Cor Intra", placeholder: "Cor Intra" },
-    { name: "Check Tirantes", label: "Check Tirantes", placeholder: "Check Tirantes" },
-    { name: "Batoques e Argolas", label: "Batoques e Argolas", placeholder: "Batoques e Argolas" },
-    { name: "Argolas", label: "Argolas", placeholder: "Argolas" },
-    { name: "Distorcedor", label: "Distorcedor", placeholder: "Distorcedor" },
-    { name: "Roldanas", label: "Roldanas", placeholder: "Roldanas" },
-    { name: "Carga nas Linhas", label: "Carga nas Linhas", placeholder: "Carga nas Linhas" },
-    { name: "Troca de linhas", label: "Troca de linhas", placeholder: "Troca de linhas" },
-    { name: "Simetria e Trimagem", label: "Simetria e Trimagem", placeholder: "Simetria e Trimagem" },
-    { name: "Corte", label: "Corte", placeholder: "Corte" },
-    { name: "Check Perfil e Costuras", label: "Check Perfil e Costuras", placeholder: "Check Perfil e Costuras" },
-    { name: "Check Intradorso", label: "Check Intradorso", placeholder: "Check Intradorso" },
-    { name: "Check Bordo Ataque", label: "Check Bordo Ataque", placeholder: "Check Bordo Ataque" },
-    { name: "Check Extradorso", label: "Check Extradorso", placeholder: "Check Extradorso" },
-    { name: "Teste Resistencia tecido", label: "Teste Resistencia tecido", placeholder: "Teste Resistencia tecido" },
-    { name: "Porosidade bordo ataque", label: "Porosidade bordo ataque", placeholder: "Porosidade bordo ataque" },
-    { name: "Porosidade Extradorso", label: "Porosidade Extradorso", placeholder: "Porosidade Extradorso" },
-    { name: "Porosidade Intradorso", label: "Porosidade Intradorso", placeholder: "Porosidade Intradorso" },
-    { name: "Parecer do Tecido (fabricante)", label: "Parecer do Tecido (fabricante)", placeholder: "Parecer do Tecido (fabricante)" },
-    { name: "Observação", label: "Observação", placeholder: "Observação" },
+  { name: "data", label: "Data", placeholder: "Data" },
+  { name: "proprietario", label: "Proprietário", placeholder: "Proprietário" },
+  { name: "telefone", label: "Telefone", placeholder: "Telefone" },
+  { name: "cidade", label: "Cidade", placeholder: "Cidade" },
+  { name: "estado", label: "Estado", placeholder: "Estado" },
+  { name: "fabrica", label: "Fábrica", placeholder: "Fábrica" },
+  { name: "modelo", label: "Modelo", placeholder: "Modelo" },
+  { name: "serial", label: "Serial", placeholder: "Serial" },
+  { name: "dataDeFabricacao", label: "Data de Fabricação", placeholder: "Data de Fabricação" },
+  { name: "corBordo", label: "Cor Bordo", placeholder: "Cor Bordo" },
+  { name: "corExtra", label: "Cor Extra", placeholder: "Cor Extra" },
+  { name: "corIntra", label: "Cor Intra", placeholder: "Cor Intra" },
+  { name: "checkTirantes", label: "Check Tirantes", placeholder: "Check Tirantes" },
+  { name: "batoquesEArgolas", label: "Batoques e Argolas", placeholder: "Batoques e Argolas" },
+  { name: "argolas", label: "Argolas", placeholder: "Argolas" },
+  { name: "distorcedor", label: "Distorcedor", placeholder: "Distorcedor" },
+  { name: "roldanas", label: "Roldanas", placeholder: "Roldanas" },
+  { name: "cargaNasLinhas", label: "Carga nas Linhas", placeholder: "Carga nas Linhas" },
+  { name: "trocaDeLinhas", label: "Troca de Linhas", placeholder: "Troca de Linhas" },
+  { name: "simetriaTrimagem", label: "Simetria e Trimagem", placeholder: "Simetria e Trimagem" },
+  { name: "corte", label: "Corte", placeholder: "Corte" },
+  { name: "checkPerfilCosturas", label: "Check Perfil e Costuras", placeholder: "Check Perfil e Costuras" },
+  { name: "checkIntradorso", label: "Check Intradorso", placeholder: "Check Intradorso" },
+  { name: "checkBordoAtaque", label: "Check Bordo Ataque", placeholder: "Check Bordo Ataque" },
+  { name: "checkExtradorso", label: "Check Extradorso", placeholder: "Check Extradorso" },
+  { name: "testeResistenciaTecido", label: "Teste Resistência Tecido", placeholder: "Teste Resistência Tecido" },
+  { name: "porosidadeBordoAtaque", label: "Porosidade Bordo Ataque", placeholder: "Porosidade Bordo Ataque" },
+  { name: "porosidadeExtradorso", label: "Porosidade Extradorso", placeholder: "Porosidade Extradorso" },
+  { name: "porosidadeIntradorso", label: "Porosidade Intradorso", placeholder: "Porosidade Intradorso" },
+  { name: "parecerDoTecidoFabricante", label: "Parecer do Tecido (Fabricante)", placeholder: "Parecer do Tecido (Fabricante)" },
+  { name: "observacoes", label: "Observação", placeholder: "Observação" },
 ];
 
 export const optionsCondicao = [
