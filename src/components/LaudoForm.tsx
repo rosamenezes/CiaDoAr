@@ -17,6 +17,10 @@ const LaudoForm: React.FC = () => {
         setIsLoading(true);
         setTimeout(() => {
             setIsLoading(false);
+            if (!data.image) {
+                Alert.alert('Erro', 'Nenhuma foto foi inserida');
+                return;
+            }
             generatePDF(data);
             Alert.alert("Sucesso", "Laudo criado com sucesso!");
         }, 1000);
