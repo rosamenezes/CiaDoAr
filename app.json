@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rosamenezes.CiaDoAr"
     },
     "android": {
       "adaptiveIcon": {
@@ -32,6 +33,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "27b51eb6-779f-4dbf-ab17-4bfa1c445725"
+      }
     }
   }
 }

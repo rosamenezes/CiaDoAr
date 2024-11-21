@@ -18,7 +18,7 @@ const ChoiceInputWithObservation: React.FC<ChoiceInputWithObservationProps> = ({
 }) => {
   return (
     <View style={{ marginBottom: 16 }}>
-      <Text style={{ marginBottom: 8 }}>{label}</Text>
+      <Text style={{ marginBottom: 8, fontSize: 24, fontWeight: 'bold' }}>{label}</Text>
       <Controller
         control={control}
         name={name}
@@ -71,7 +71,7 @@ const ChoiceInputWithObservation: React.FC<ChoiceInputWithObservationProps> = ({
                       padding: 12,
                       borderWidth: 1,
                       borderColor: '#ccc',
-                      borderRadius: 8,
+                      borderRadius: 10,
                     }}
                     placeholder="Escreva suas observações aqui"
                     onChangeText={onChangeObs}

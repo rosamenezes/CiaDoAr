@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, Image, Alert } from 'react-native';
+import { View, Text, Button, Image, Alert, TouchableOpacity } from 'react-native';
 import { Controller, Control } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -7,7 +7,7 @@ interface ImageInputFieldProps {
     name: string;
     control: Control<any>;
     label: string;
-    onImageSelect?: (uri: string) => void;  // Adicionando a propriedade onImageSelect
+    onImageSelect?: (uri: string) => void;
 }
 
 const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label, onImageSelect }) => {
@@ -18,7 +18,7 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label,
             return;
         }
 
-        const options = await Alert.alert(
+        Alert.alert(
             "Selecionar Imagem",
             "Escolha uma opção:",
             [
@@ -61,22 +61,28 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label,
                 },
             ]
         );
-
-        if (options === undefined) {
-            console.log("Nenhuma opção escolhida.");
-        }
     };
 
     return (
-        <View className="mb-4">
-            <Text className="text-xl">{label}:</Text>
+        <View className="mb-6">
+            <Text className="text-xl font-bold mb-2 text-gray-800">{label}:</Text>
             <Controller
                 control={control}
                 name={name}
                 render={({ field: { onChange, value } }) => (
-                    <View>
-                        {value && <Image source={{ uri: value }} style={{ width: 200, height: 200 }} />}
-                        <Button title="Selecionar Imagem" onPress={() => handleImagePicker(onChange)} />
+                    <View className="items-center">
+                        {value && (
+                            <Image
+                                source={{ uri: value }}
+                                className="w-48 h-48 rounded-lg mb-4 border border-gray-300"
+                            />
+                        )}
+                        <TouchableOpacity
+                            onPress={() => handleImagePicker(onChange)}
+                            className="bg-blue-500 px-4 py-3 rounded-full shadow-sm active:bg-blue-600"
+                        >
+                            <Text className="text-white font-semibold text-center">Selecionar Imagem</Text>
+                        </TouchableOpacity>
                     </View>
                 )}
             />
@@ -85,5 +91,3 @@ const ImageInputField: React.FC<ImageInputFieldProps> = ({ name, control, label,
 };
 
 export default ImageInputField;
-
-

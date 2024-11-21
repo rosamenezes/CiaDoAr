@@ -20,7 +20,7 @@ const DatePickerInput: React.FC<DatePickerInputProps> = ({ name, control, label 
       defaultValue={new Date()}
       render={({ field: { onChange, value } }) => (
         <View style={{ marginBottom: 16 }}>
-          <Text style={{ marginBottom: 8 }}>{label}</Text>
+          <Text style={{ marginBottom: 8, fontSize: 18, fontWeight: 'bold' }}>{label}</Text>
           <TouchableOpacity
             onPress={() => {
               setShow(true);

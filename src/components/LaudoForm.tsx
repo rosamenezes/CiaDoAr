@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { ScrollView, Text, TouchableOpacity, Alert, ActivityIndicator, View } from "react-native";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import StandardInput from "../components/StandardInput";
@@ -27,51 +27,57 @@ const LaudoForm: React.FC = () => {
     };
 
     return (
-        <ScrollView contentContainerStyle={{ padding: 16 }} className="flex-1 bg-white">
-            <Text className="text-3xl font-extrabold text-center text-gray-800 mb-6">Laudo novo:</Text>
+        <ScrollView contentContainerStyle={{ paddingVertical: 20 }} className="flex-1 bg-gray-100">
+            <View className="bg-white p-6 rounded-lg shadow-md mx-4 mb-6">
+                <Text className="text-3xl font-extrabold text-center color-gray-400 mb-6">Laudo Novo</Text>
 
-            {/* Campo específico para a data */}
-            <DatePickerInput name={formFields[0].name} control={control} label={formFields[0].label} />
-            
-{/* Mapeando outros campos, exceto o de data */}
-            {formFields
-            .filter((field) => field.name !== formFields[0].name) // Filtra o campo de data
-            .map((field) => (
-                <StandardInput
-                    key={field.name}
-                    name={field.name}
+                {/* Campo específico para a data */}
+                <DatePickerInput
+                    name={formFields[0].name}
                     control={control}
-                    label={field.label}
-                    placeholder={field.placeholder}
-            />
-    ))
-}
+                    label={formFields[0].label}
+                />
 
+                {/* Mapeando outros campos, exceto o de data */}
+                {formFields
+                    .filter((field) => field.name !== formFields[0].name) // Filtra o campo de data
+                    .map((field) => (
+                        <StandardInput
+                            key={field.name}
+                            name={field.name}
+                            control={control}
+                            label={field.label}
+                            placeholder={field.placeholder}
+                        />
+                    ))}
 
-            <CustomSelect
-                label="Condição geral da vela:"
-                options={optionsCondicao}
-                onSelect={(value) => setValue('condicaoVela', value)}
-            />
+                <CustomSelect
+                    label="Condição geral da vela"
+                    options={optionsCondicao}
+                    onSelect={(value) => setValue('condicaoVela', value)}
+                />
 
-            <ImageInput
-                name="image"
-                control={control}
-                label="Selecionar Imagem"
-                onImageSelect={(uri: string) => setValue('image', uri)}
-            />
+                <ImageInput
+                    name="image"
+                    control={control}
+                    label="Selecionar Imagem"
+                    onImageSelect={(uri: string) => setValue('image', uri)}
+                />
+            </View>
 
-            <TouchableOpacity
-                className="bg-pink-600 py-3 px-10 rounded-full w-full max-w-xs mx-auto my-8"
-                onPress={handleSubmit(handleCreate)}
-                disabled={isLoading}
-            >
-                {isLoading ? (
-                    <ActivityIndicator color="#fff" />
-                ) : (
-                    <Text className="text-white text-center">Criar</Text>
-                )}
-            </TouchableOpacity>
+            <View className="items-center">
+                <TouchableOpacity
+                    className={`bg-pink-600 py-4 px-10 rounded-full w-11/12 max-w-xs mx-auto my-8 ${isLoading ? 'opacity-50' : ''}`}
+                    onPress={handleSubmit(handleCreate)}
+                    disabled={isLoading}
+                >
+                    {isLoading ? (
+                        <ActivityIndicator color="#fff" />
+                    ) : (
+                        <Text className="text-white text-lg font-semibold text-center">Criar Laudo</Text>
+                    )}
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     );
 };

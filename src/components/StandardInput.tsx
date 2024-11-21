@@ -10,16 +10,17 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({ name, control, label, placeholder }) => (
     <View className="mb-4">
-        <Text className="text-1xl">{label}:</Text>
-            <Controller
-                control={control}
-                name={name}
-                render={({ field: { onChange, onBlur, value } }) => (
+        <Text className="text-xl font-bold">{label}:</Text>
+        <Controller
+            control={control}
+            name={name}
+            render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                     onChangeText={onChange}
                     onBlur={onBlur}
                     value={value}
                     placeholder={placeholder}
+                    placeholderTextColor="#A0AEC0" // Cinza claro
                     className="border border-gray-300 rounded p-2"
                 />
             )}
