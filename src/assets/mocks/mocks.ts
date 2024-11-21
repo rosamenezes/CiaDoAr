@@ -4,8 +4,10 @@ export interface FormData {
     data: Date;
     proprietario: string;
     telefone: string;
+    email: string;
     cidade: string;
     estado: string;
+    endereco: string;
     fabrica: string;
     modelo: string;
     serial: string;
@@ -15,10 +17,9 @@ export interface FormData {
     corIntra: string;
     checkTirantes: string;
     batoquesArgolas: string;
-    argolas: string;
     distorcedor: string;
     roldanas: string;
-    cargasNasLinhas: string;
+    cargaNasLinhas: string;
     trocaDeLinhas: string;
     simetriaTrimagem: string;
     corte: string;
@@ -38,8 +39,10 @@ export const formFields = [
   { name: "data", label: "Data", placeholder: "Data" },
   { name: "proprietario", label: "Proprietário", placeholder: "Proprietário" },
   { name: "telefone", label: "Telefone", placeholder: "Telefone" },
+  { name: "email", label: "E-mail", placeholder: "E-mail" },
   { name: "cidade", label: "Cidade", placeholder: "Cidade" },
   { name: "estado", label: "Estado", placeholder: "Estado" },
+  { name: "endereco", label: "Endereço", placeholder: "Endereço" },
   { name: "fabrica", label: "Fábrica", placeholder: "Fábrica" },
   { name: "modelo", label: "Modelo", placeholder: "Modelo" },
   { name: "serial", label: "Serial", placeholder: "Serial" },
@@ -48,8 +51,7 @@ export const formFields = [
   { name: "corExtra", label: "Cor Extra", placeholder: "Cor Extra" },
   { name: "corIntra", label: "Cor Intra", placeholder: "Cor Intra" },
   { name: "checkTirantes", label: "Check Tirantes", placeholder: "Check Tirantes" },
-  { name: "batoquesEArgolas", label: "Batoques e Argolas", placeholder: "Batoques e Argolas" },
-  { name: "argolas", label: "Argolas", placeholder: "Argolas" },
+  { name: "batoquesArgolas", label: "Batoques e Argolas", placeholder: "Batoques e Argolas" },
   { name: "distorcedor", label: "Distorcedor", placeholder: "Distorcedor" },
   { name: "roldanas", label: "Roldanas", placeholder: "Roldanas" },
   { name: "cargaNasLinhas", label: "Carga nas Linhas", placeholder: "Carga nas Linhas" },
@@ -60,7 +62,7 @@ export const formFields = [
   { name: "checkIntradorso", label: "Check Intradorso", placeholder: "Check Intradorso" },
   { name: "checkBordoAtaque", label: "Check Bordo Ataque", placeholder: "Check Bordo Ataque" },
   { name: "checkExtradorso", label: "Check Extradorso", placeholder: "Check Extradorso" },
-  { name: "testeResistenciaTecido", label: "Teste Resistência Tecido", placeholder: "Teste Resistência Tecido" },
+  { name: "testeResistenciaTecido", label: "Battsometer (Teste de Resistência)", placeholder: "Battsometer (Teste de Resistência)" },
   { name: "porosidadeBordoAtaque", label: "Porosidade Bordo Ataque", placeholder: "Porosidade Bordo Ataque" },
   { name: "porosidadeExtradorso", label: "Porosidade Extradorso", placeholder: "Porosidade Extradorso" },
   { name: "porosidadeIntradorso", label: "Porosidade Intradorso", placeholder: "Porosidade Intradorso" },

@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { optionsCondicao } from '../assets/mocks/mocks';
 import { logo64 } from '../assets/mocks/mocks';
 import convertFileUriToBase64 from '../utils/convertImageBase64';
-import PDFLib, { PDFDocument, PDFPage } from 'react-native-pdf-lib';
+
 
 export const generatePDF = async (data: FormData) => {
     const formattedDate = data.data ? format(data.data, 'dd/MM/yyyy') : '';
@@ -124,13 +124,18 @@ export const generatePDF = async (data: FormData) => {
 
         /* Estilos para imagens */
         img {
-            max-width: 100%;
+            text-align: center;
+            max-width: 30%;
             height: auto;
+        }
+        
+        .image-container {
+            text-align: center;
         }
 
         /* Ajusta a imagem para caber na página */
         .pagina-1 img {
-            max-height: 70mm; /* Ajustado para caber com o espaçamento aumentado */
+            max-height:  100px/* Ajustado para caber com o espaçamento aumentado */
             display: block;
             margin: 0 auto;
         }
@@ -164,48 +169,6 @@ export const generatePDF = async (data: FormData) => {
             max-height: 60px; /* Aumenta o tamanho do logo se necessário */
         }
 
-        /* Estilos específicos para a página 3 */
-        .pagina-3 {
-            background-color: #f9f9f9; /* Fundo leve */
-            padding: 20px; /* Padding extra para espaço ao redor do conteúdo */
-            border-radius: 8px; /* Bordas arredondadas para a página */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
-            font-size: 14pt; /* Aumenta o tamanho do texto para a página 3 */
-        }
-
-        /* Título de seção principal da página 3 */
-        .pagina-3 h2 {
-            color: #008000; /* Altera a cor do texto para verde */
-            font-size: 22pt; /* Aumenta o tamanho do título */
-            text-align: center;
-            margin-bottom: 25px; /* Espaçamento inferior maior */
-            padding: 10px; /* Adiciona espaçamento interno ao redor do texto */
-            width: fit-content; /* Ajusta a largura ao tamanho do conteúdo */
-            margin: 0 auto; /* Centraliza o título */
-        }
-
-        /* Estilos para o título "Parecer Geral da Vela" */
-        .pagina-3 h3 {
-            color: #010101; /* Cor de texto neutra */
-            font-size: 18pt; /* Aumenta o tamanho do título */
-            text-align: center;
-            margin: 20px 0; /* Maior espaçamento */
-        }
-
-        /* Estilos para seções de avaliação */
-        .pagina-3 section {
-            background-color: #ffffff; /* Fundo branco para contraste */
-            padding: 15px; /* Espaçamento interno */
-            margin-bottom: 15px; /* Espaçamento inferior entre seções */
-            border-radius: 8px; /* Bordas arredondadas */
-            border: 2px solid black; /* Borda sutil */
-        }
-
-        /* Estilo para subitens de parecer */
-        .pagina-3 h3 + h3 {
-            margin-top: 20px; /* Espaçamento entre o texto verde e os itens abaixo */
-        }
-
         /* Ajustes para impressão */
         @media print {
             body {
@@ -218,6 +181,16 @@ export const generatePDF = async (data: FormData) => {
             .pagina-3 {
                 background-color: #fff;
                 box-shadow: none;
+                border: none;
+            }
+            .pagina-4 {
+                padding-top: 30px;
+                p {
+                    font-size: 8pt;
+                }
+                h4 {
+                    font-size: 10pt;
+                }
                 border: none;
             }
         }
@@ -265,7 +238,7 @@ export const generatePDF = async (data: FormData) => {
 
             <!-- Informações do proprietário -->
             <section>
-                <div><h3>PROPRIETÁRIO</h3></div>
+                <div style="background-color: #008000;" ><h3>PROPRIETÁRIO</h3></div>
                 <h3 class="proprietario">
                     ${data.proprietario}
                 </h3>
@@ -274,7 +247,7 @@ export const generatePDF = async (data: FormData) => {
                         <thead>
                             <tr>
                                 <th>Data</th>
-                                <th>Endereço</th>
+                                <th>Cidade/Estado</th>
                                 <th>Telefone</th>
                             </tr>
                         </thead>
@@ -286,12 +259,26 @@ export const generatePDF = async (data: FormData) => {
                             </tr>
                         </tbody>
                     </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Endereço</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${data.endereco || ''}</td>
+                                <td>${data.email || ''}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
             <!-- Identificação da vela -->
             <section>
-                <div><h3>IDENTIFICAÇÃO DA VELA</h3></div>
+                <div style="padding-top: 20px;"><h3>IDENTIFICAÇÃO DA VELA</h3></div>
                 <div>
                     <table>
                         <thead>
@@ -329,63 +316,20 @@ export const generatePDF = async (data: FormData) => {
                     </table>
                 </div>
             </section>
-
-            <!-- Identificação visual da vela -->
-            <section>
-                <div><h3>IDENTIFICAÇÃO VISUAL DA VELA</h3></div>
-                <div>
-                    <img src="${image64}" alt="Imagem da Vela" />
-                </div>
-            </section>
         </div>
 
         <!-- PAGINA 2 -->
         <div class="pagina pagina-2">
 
-            <!-- Checagem de linhas -->
+            <!-- Identificação visual da vela -->
             <section>
-                <div><h3>CHECAGEM DE LINHAS</h3></div>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Tirantes</th>
-                                <th>Batoques e Argolas</th>
-                                <th>Roldanas</th>
-                                <th>Distorcedor</th>
-                                <th>Carga nas Linhas</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>${data.checkTirantes || ''}</td>
-                                <td>${data.batoquesArgolas || ''}</td>
-                                <td>${data.roldanas || ''}</td>
-                                <td>${data.distorcedor || ''}</td>
-                                <td>${data.cargasNasLinhas || ''}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Troca de Linhas</th>
-                                <th>Simetria e Trimagem</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>${data.trocaDeLinhas || ''}</td>
-                                <td>${data.simetriaTrimagem || ''}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div><h3>IDENTIFICAÇÃO VISUAL DA VELA</h3></div>
+                <div class="image-container">
+                    <img src="${image64}" alt="Imagem da Vela" />
                 </div>
             </section>
 
-            <!-- Checagem do tecido -->
+                   <!-- Checagem do tecido -->
             <section>
                 <div><h3>CHECAGEM DO TECIDO</h3></div>
                 <div>
@@ -439,20 +383,78 @@ export const generatePDF = async (data: FormData) => {
 
         <!-- PAGINA 3 -->
         <div class="pagina pagina-3">
+                    <!-- Checagem de linhas -->
+            <section>
+                <div><h3>CHECAGEM DE LINHAS</h3></div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tirantes</th>
+                                <th>Batoques e Argolas</th>
+                                <th>Roldanas</th>
+                                <th>Distorcedor</th>
+                                <th>Carga nas Linhas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${data.checkTirantes || ''}</td>
+                                <td>${data.batoquesArgolas || ''}</td>
+                                <td>${data.roldanas || ''}</td>
+                                <td>${data.distorcedor || ''}</td>
+                                <td>${data.cargaNasLinhas || ''}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Troca de Linhas</th>
+                                <th>Simetria e Trimagem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${data.trocaDeLinhas || ''}</td>
+                                <td>${data.simetriaTrimagem || ''}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
             <!-- Parecer geral da vela -->
             <section>
-                <div><h1>PARECER GERAL DA VELA</h1></div>
+                <div style= "padding-top: 10px;"><h1>PARECER GERAL DA VELA</h1></div>
                 <h2>${data.condicaoVela || ''}</h2>
-                <div>
-                    <h3>${optionsCondicao[0].value || ''}</h3>
-                    <h3>${optionsCondicao[1].value || ''}</h3>
-                    <h3>${optionsCondicao[2].value || ''}</h3>
-                    <h3>${optionsCondicao[3].value || ''}</h3>
-                    <h3>${optionsCondicao[4].value || ''}</h3>
-                    <h3>${optionsCondicao[5].value || ''}</h3>
+                <div style = "text-align: center; line-height: 1;">
+                    <h4>${optionsCondicao[0].value || ''}</h3>
+                    <h4>${optionsCondicao[1].value || ''}</h3>
+                    <h4>${optionsCondicao[2].value || ''}</h3>
+                    <h4>${optionsCondicao[3].value || ''}</h3>
+                    <h4>${optionsCondicao[4].value || ''}</h3>
+                    <h4>${optionsCondicao[5].value || ''}</h3>
                 </div>
             </section>
+        
+            <div style="text-align: center; line-height: 1;" class="pagina-4">
+                <h4>Certificações:</h4>
+                <p>Conforme norma mundial de Homologação de Parapente é necessário a manutenção ANUAL do equipamento.</p>
+                <h4 style="font-weight: bold;">Parametros de Porosidade:</h4>
+                <p>- 0' à 5' : Não recomendado voar - Risco de parachutagem</p>
+                <p>- 6' à 20' : Muito usado - ainda voável</p>
+                <p>- 21' à 60' : Usado - voável</p>
+                <p>- 61' à 120' : Pousoc usado - Muito bom</p>
+                <p>- + 120'' : Exelente - Novo</p>
+                <h4 style="font-weight: bold;">Bettsometer (Dinamômetro):</h4>
+                <p>Aparelho que possui uma agulha apropriada na ponta. O tecido não pode abrir mais que 5mm quando aplicado a uma força até 600 gramas.</p>
+            </div>
+            <div style="text-align: center; padding-top: 20px;">
+                    <img src="${logo64}" alt="Logo" class="logo" />
+                </div>
         </div>
     </main>
 </body>
