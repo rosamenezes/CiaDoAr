@@ -291,7 +291,7 @@ export const generatePDF = async (data: FormData) => {
                         <tbody>
                             <tr>
                                 <td>${data.fabrica || ''}</td>
-                                <td>${data.serial || ''}</td>
+                                <td>${data.numeroSerie || ''}</td>
                                 <td>${data.dataDeFabricacao || ''}</td>
                             </tr>
                         </tbody>
@@ -329,7 +329,7 @@ export const generatePDF = async (data: FormData) => {
                 </div>
             </section>
 
-                   <!-- Checagem do tecido -->
+            <!-- Checagem do tecido -->
             <section>
                 <div><h3>CHECAGEM DO TECIDO</h3></div>
                 <div>

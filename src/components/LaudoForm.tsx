@@ -8,10 +8,13 @@ import { formFields } from "../assets/mocks/mocks";
 import CustomSelect from "../components/SelectInput";
 import { FormData, optionsCondicao } from "../assets/mocks/mocks";
 import { generatePDF } from "./generatePDF";
+import DefaultOkInput from "./DefaultOkInput";
 
 const LaudoForm: React.FC = () => {
     const { control, handleSubmit, setValue } = useForm<FormData>();
     const [isLoading, setIsLoading] = useState(false);
+    const normalInputs = formFields.slice(0, 14);
+    const defaultInputs = formFields.slice(14);
 
     const handleCreate: SubmitHandler<FormData> = (data) => {
         setIsLoading(true);
@@ -39,7 +42,7 @@ const LaudoForm: React.FC = () => {
                 />
 
                 {/* Mapeando outros campos, exceto o de data */}
-                {formFields
+                {normalInputs
                     .filter((field) => field.name !== formFields[0].name) // Filtra o campo de data
                     .map((field) => (
                         <StandardInput
@@ -50,6 +53,17 @@ const LaudoForm: React.FC = () => {
                             placeholder={field.placeholder}
                         />
                     ))}
+                
+                {defaultInputs.map((field) => (
+                    <DefaultOkInput
+                        key={field.name}
+                        name={field.name}
+                        control={control}
+                        label={field.label}
+                        placeholder={field.placeholder}
+                        defaultValue={"Ok"}
+                    />
+                ))}
 
                 <CustomSelect
                     label="Condição geral da vela"

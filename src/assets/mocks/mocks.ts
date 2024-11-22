@@ -10,7 +10,7 @@ export interface FormData {
     endereco: string;
     fabrica: string;
     modelo: string;
-    serial: string;
+    numeroSerie: string;
     dataDeFabricacao: string;
     corBordo: string;
     corExtra: string;
@@ -45,7 +45,7 @@ export const formFields = [
   { name: "endereco", label: "Endereço", placeholder: "Endereço" },
   { name: "fabrica", label: "Fábrica", placeholder: "Fábrica" },
   { name: "modelo", label: "Modelo", placeholder: "Modelo" },
-  { name: "serial", label: "Serial", placeholder: "Serial" },
+  { name: "numeroSerie", label: "Número de Série", placeholder: "Número de Série" },
   { name: "dataDeFabricacao", label: "Data de Fabricação", placeholder: "Data de Fabricação" },
   { name: "corBordo", label: "Cor Bordo", placeholder: "Cor Bordo" },
   { name: "corExtra", label: "Cor Extra", placeholder: "Cor Extra" },
