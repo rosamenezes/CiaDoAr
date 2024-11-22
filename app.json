@@ -14,7 +14,15 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rosamenezes.CiaDoAr"
+      "bundleIdentifier": "com.rosamenezes.CiaDoAr",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        },
+        "LSSupportsOpeningDocumentsInPlace": true,
+        "NSCameraUsageDescription": "O app precisa acessar a câmera para escanear documentos.",
+        "NSMicrophoneUsageDescription": "O app precisa acessar o microfone para gravações de áudio."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -41,3 +49,4 @@
     }
   }
 }
+

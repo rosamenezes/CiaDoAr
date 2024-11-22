@@ -11,89 +11,126 @@ import { generatePDF } from "./generatePDF";
 import DefaultOkInput from "./DefaultOkInput";
 
 const LaudoForm: React.FC = () => {
-    const { control, handleSubmit, setValue } = useForm<FormData>();
-    const [isLoading, setIsLoading] = useState(false);
-    const normalInputs = formFields.slice(0, 14);
-    const defaultInputs = formFields.slice(14);
+  // Estado para controlar o carregamento do botão
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleCreate: SubmitHandler<FormData> = (data) => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-            if (!data.image) {
-                Alert.alert('Erro', 'Nenhuma foto foi inserida');
-                return;
-            }
-            generatePDF(data);
-            Alert.alert("Sucesso", "Laudo criado com sucesso!");
-        }, 1000);
-    };
+  // Inicializa o React Hook Form
+  const { control, handleSubmit, setValue } = useForm<FormData>();
 
-    return (
-        <ScrollView contentContainerStyle={{ paddingVertical: 20 }} className="flex-1 bg-gray-100">
-            <View className="bg-white p-6 rounded-lg shadow-md mx-4 mb-6">
-                <Text className="text-3xl font-extrabold text-center color-gray-400 mb-6">Laudo Novo</Text>
+  // Divide os campos do formulário em grupos
+  const normalInputs = formFields.slice(0, 14); // Primeiros 14 campos
+  const defaultInputs = formFields.slice(14, 26); // Campos com valor padrão "Ok"
+  const otherNormalInputs = formFields.slice(26); // Campos restantes
 
-                {/* Campo específico para a data */}
-                <DatePickerInput
-                    name={formFields[0].name}
-                    control={control}
-                    label={formFields[0].label}
-                />
+  // Função chamada ao submeter o formulário
+  const handleCreate: SubmitHandler<FormData> = (data) => {
+    setIsLoading(true); // Ativa o carregamento do botão
 
-                {/* Mapeando outros campos, exceto o de data */}
-                {normalInputs
-                    .filter((field) => field.name !== formFields[0].name) // Filtra o campo de data
-                    .map((field) => (
-                        <StandardInput
-                            key={field.name}
-                            name={field.name}
-                            control={control}
-                            label={field.label}
-                            placeholder={field.placeholder}
-                        />
-                    ))}
-                
-                {defaultInputs.map((field) => (
-                    <DefaultOkInput
-                        key={field.name}
-                        name={field.name}
-                        control={control}
-                        label={field.label}
-                        placeholder={field.placeholder}
-                        defaultValue={"Ok"}
-                    />
-                ))}
+    setTimeout(() => {
+      setIsLoading(false); // Desativa o carregamento
 
-                <CustomSelect
-                    label="Condição geral da vela"
-                    options={optionsCondicao}
-                    onSelect={(value) => setValue('condicaoVela', value)}
-                />
+      // Validação simples para verificar se a imagem foi inserida
+      if (!data.image) {
+        Alert.alert('Erro', 'Nenhuma foto foi inserida');
+        return;
+      }
 
-                <ImageInput
-                    name="image"
-                    control={control}
-                    label="Selecionar Imagem"
-                    onImageSelect={(uri: string) => setValue('image', uri)}
-                />
-            </View>
+      // Gera o PDF com os dados do formulário
+      generatePDF(data);
 
-            <View className="items-center">
-                <TouchableOpacity
-                    className={`bg-pink-600 py-4 px-10 rounded-full w-11/12 max-w-xs mx-auto my-8 ${isLoading ? 'opacity-50' : ''}`}
-                    onPress={handleSubmit(handleCreate)}
-                    disabled={isLoading}
-                >
-                    {isLoading ? (
-                        <ActivityIndicator color="#fff" />
-                    ) : (
-                        <Text className="text-white text-lg font-semibold text-center">Criar Laudo</Text>
-                    )}
-                </TouchableOpacity>
-            </View>
-        </ScrollView>
-    );
+      Alert.alert("Sucesso", "Laudo criado com sucesso!");
+    }, 1000); // Simula um delay de 1 segundo
+  };
+
+  return (
+    <ScrollView 
+      contentContainerStyle={{ paddingVertical: 20 }} 
+      className="flex-1 bg-gray-100"
+    >
+      <View className="bg-white p-6 rounded-lg shadow-md mx-4 mb-6">
+        {/* Título do formulário */}
+        <Text className="text-3xl font-extrabold text-center color-gray-400 mb-6">
+          Laudo Novo
+        </Text>
+
+        {/* Campo para selecionar a data */}
+        <DatePickerInput
+          name={formFields[0].name}
+          control={control}
+          label={formFields[0].label}
+        />
+
+        {/* Campos regulares do formulário */}
+        {normalInputs
+          .filter((field) => field.name !== formFields[0].name) // Remove o campo de data
+          .map((field) => (
+            <StandardInput
+              key={field.name}
+              name={field.name}
+              control={control}
+              label={field.label}
+              placeholder={field.placeholder}
+            />
+          ))}
+
+        {/* Campos com valor padrão "Ok" */}
+        {defaultInputs.map((field) => (
+          <DefaultOkInput
+            key={field.name}
+            name={field.name}
+            control={control}
+            label={field.label}
+            placeholder={field.placeholder}
+            defaultValue="Ok"
+          />
+        ))}
+
+        {/* Campos restantes do formulário */}
+        {otherNormalInputs.map((field) => (
+          <StandardInput
+            key={field.name}
+            name={field.name}
+            control={control}
+            label={field.label}
+            placeholder={field.placeholder}
+          />
+        ))}
+
+        {/* Campo de seleção para a condição da vela */}
+        <CustomSelect
+          label="Condição geral da vela"
+          options={optionsCondicao}
+          onSelect={(value) => setValue('condicaoVela', value)}
+        />
+
+        {/* Campo para inserir imagem */}
+        <ImageInput
+          name="image"
+          control={control}
+          label="Selecionar Imagem"
+          onImageSelect={(uri: string) => setValue('image', uri)}
+        />
+      </View>
+
+      {/* Botão para criar o laudo */}
+      <View className="items-center">
+        <TouchableOpacity
+          className={`bg-pink-600 py-4 px-10 rounded-full w-11/12 max-w-xs mx-auto my-8 ${isLoading ? 'opacity-50' : ''}`}
+          onPress={handleSubmit(handleCreate)} // Lida com o envio do formulário
+          disabled={isLoading} // Desativa o botão enquanto está carregando
+        >
+          {isLoading ? (
+            <ActivityIndicator color="#fff" /> // Exibe um indicador de carregamento
+          ) : (
+            <Text className="text-white text-lg font-semibold text-center">
+              Criar Laudo
+            </Text>
+          )}
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
 };
 
 export default LaudoForm;
+

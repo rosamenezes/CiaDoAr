@@ -1,4 +1,5 @@
 import * as Print from 'expo-print';
+import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { Alert } from 'react-native';
 import { FormData } from '../assets/mocks/mocks';
@@ -7,12 +8,15 @@ import { optionsCondicao } from '../assets/mocks/mocks';
 import { logo64 } from '../assets/mocks/mocks';
 import convertFileUriToBase64 from '../utils/convertImageBase64';
 
-
 export const generatePDF = async (data: FormData) => {
-    const formattedDate = data.data ? format(data.data, 'dd/MM/yyyy') : '';
-    const image64 = await convertFileUriToBase64(data.image);
-    console.log(data);
-    const htmlContent = `
+  // Formata a data ou retorna uma string vazia
+  const formattedDate = data.data ? format(data.data, 'dd/MM/yyyy') : '';
+  
+  // Converte a imagem para base64
+  const image64 = await convertFileUriToBase64(data.image);
+
+  // Conteúdo HTML para o PDF
+  const htmlContent = `
     <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -452,9 +456,6 @@ export const generatePDF = async (data: FormData) => {
                 <h4 style="font-weight: bold;">Bettsometer (Dinamômetro):</h4>
                 <p>Aparelho que possui uma agulha apropriada na ponta. O tecido não pode abrir mais que 5mm quando aplicado a uma força até 600 gramas.</p>
             </div>
-            <div style="text-align: center; padding-top: 20px;">
-                    <img src="${logo64}" alt="Logo" class="logo" />
-                </div>
         </div>
     </main>
 </body>
@@ -462,16 +463,29 @@ export const generatePDF = async (data: FormData) => {
     `;
 
     try {
-        const { uri } = await Print.printToFileAsync({
-            html: htmlContent,
-        });
+        // Gera o PDF temporário
+        const { uri } = await Print.printToFileAsync({ html: htmlContent });
+    
+        // Define a pasta de destino
+        const folderUri = `${FileSystem.documentDirectory}pdfs/`;
+        await FileSystem.makeDirectoryAsync(folderUri, { intermediates: true });
+    
+        // Define o nome do arquivo e o destino
+        const fileName = `laudo_${formattedDate.replace(/\//g, '-')}.pdf`;
+        const destUri = `${folderUri}${fileName}`;
+    
+        // Move o arquivo para a pasta correta
+        await FileSystem.moveAsync({ from: uri, to: destUri });
+    
+        // Compartilha ou exibe o caminho
         if (await Sharing.isAvailableAsync()) {
-            await Sharing.shareAsync(uri);
+          await Sharing.shareAsync(destUri);
         } else {
-            Alert.alert('PDF Gerado', `PDF salvo em: ${uri}`);
+          Alert.alert('PDF Gerado', `PDF salvo em: ${destUri}`);
         }
-    } catch (error) {
-        Alert.alert('Erro', 'Não foi possível gerar o PDF');
-    }
-};
+      } catch (error) {
+        Alert.alert('Erro', 'Não foi possível gerar ou salvar o PDF.');
+        console.error(error);
+      }
+    };
 
