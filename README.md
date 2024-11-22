@@ -1,5 +1,5 @@
 
-# FlyCheck :rocket: Gerenciados de Laudos de Parapente :rocket:
+# Cia do Ar   :rocket: Gerenciados de Laudos de Parapente :rocket:
 
 Aplicativo mobile (Expo/React Native) utilizado para gerar laudos em PDF personalizaveis, possibilitando compartilhar e imprimir os laudos. 
 
